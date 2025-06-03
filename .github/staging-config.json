@@ -1,0 +1,55 @@
+{
+    "release-type": "expo",
+    "prerelease": true,
+    "prerelease-type": "staging",
+    "versioning": "prerelease",
+    "include-component-in-tag": false,
+    "changelog-sections": [
+        {
+            "type": "feat",
+            "section": "✨ 新功能"
+        },
+        {
+            "type": "fix",
+            "section": "🐛 Bug 修復"
+        },
+        {
+            "type": "docs",
+            "section": "📚 文檔更新"
+        },
+        {
+            "type": "style",
+            "section": "💄 樣式調整"
+        },
+        {
+            "type": "refactor",
+            "section": "♻️ 代碼重構"
+        },
+        {
+            "type": "perf",
+            "section": "⚡ 性能優化"
+        },
+        {
+            "type": "test",
+            "section": "✅ 測試相關"
+        },
+        {
+            "type": "build",
+            "section": "📦 構建系統"
+        },
+        {
+            "type": "ci",
+            "section": "👷 CI/CD"
+        },
+        {
+            "type": "chore",
+            "section": "🔧 其他變更"
+        }
+    ],
+    "include-v-in-tag": true,
+    "packages": {
+        ".": {
+            "release-type": "expo"
+        }
+    }
+}
