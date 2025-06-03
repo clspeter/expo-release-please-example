@@ -1,8 +1,9 @@
 name: Release
 
 on:
-  # 改為手動觸發
-  workflow_dispatch:
+  # Triggers the workflow on push events but only for default and protected branches
+  push:
+    branches: [ "main" ]
 
 # The different jobs of this workflow need the following permissions
 permissions:
@@ -34,10 +35,10 @@ jobs:
           gh label create "autorelease: snapshot" -c D4C5F9 -d "release-please PR tagging - Ready for release" || true
           gh label create "autorelease: published" -c 0E8A16 -d "release-please PR tagging - Released" || true
 
-  # This job creates or finalizes a release pull request
+  # This job creates or finalizes a prerelease pull request or finalizes a release pull request
   # and provides the necessary outputs for the subsequent jobs
-  release-prep:
-    name: Create Release Pull Request
+  prerelease-prep:
+    name: Create Prerelease Pull Request
     runs-on: ubuntu-latest
     needs: [ label-check ]
     outputs:
@@ -45,53 +46,62 @@ jobs:
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
       - id: release
-        name: Run release-please
+        name: Run prerelease release-please
+        uses: googleapis/release-please-action@v4.2.0
+        with:
+          config-file: ".github/staging-config.json"
+          manifest-file: ".github/staging-manifest.json"
+          #token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
+
+  # This job runs tests before the creation of the prerelease
+  prerelease-test:
+    name: Run Prerelease Tests
+    runs-on: ubuntu-latest
+    if: ${{ needs.prerelease-prep.outputs.releases_created == 'false' }}
+    needs: [ prerelease-prep ]
+    steps:
+      - name: Release Build Push Deploy
+        run: |
+          echo "Prerelease Tests"
+
+  # This job runs creates the Prerelease and creates a subsequent Release Pull Request
+  prerelease:
+    name: Create Prerelease and Release Pull Request
+    runs-on: ubuntu-latest
+    if: ${{ needs.prerelease-prep.outputs.releases_created == 'true' && contains(needs.prerelease-prep.outputs.tag_name, 'staging') }}
+    needs: [ prerelease-prep ]
+    steps:
+      - name: Pre Release Step
+        run: |
+          echo "Running pre-release step!"
+
+      - name: Run release release-please
         uses: googleapis/release-please-action@v4.2.0
         with:
           config-file: ".github/release-config.json"
           manifest-file: ".github/release-manifest.json"
           #token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
 
-  # This job runs tests before the creation of the release
-  release-test:
-    name: Run Release Tests
+  # This job runs post-prerelease steps
+  post-prerelease:
+    name: Post Prerelease Steps
     runs-on: ubuntu-latest
-    if: ${{ needs.release-prep.outputs.releases_created == 'false' }}
-    needs: [ release-prep ]
+    needs: [ prerelease ]
     steps:
-      - name: Release Build Test
+      - name: Post Prerelease Step
         run: |
-          echo "Running release tests and build validation"
+          echo "Running post-prerelease steps!"
 
-  # This job creates the final release
+  # This job creates the final release and Syncs the prerelease manifest
   release:
     name: Create Release
     runs-on: ubuntu-latest
-    if: ${{ needs.release-prep.outputs.releases_created == 'true' }}
-    needs: [ release-prep ]
+    if: ${{ needs.prerelease-prep.outputs.releases_created == 'true' && !contains(needs.prerelease-prep.outputs.tag_name, 'staging') }}
+    needs: [ prerelease-prep ]
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Create release branch
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          TAG_NAME="${{ needs.release-prep.outputs.tag_name }}"
-          BRANCH_NAME="release/${TAG_NAME}"
-          echo "Creating release branch: ${BRANCH_NAME}"
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          git checkout -b "${BRANCH_NAME}"
-          git push origin "${BRANCH_NAME}"
-
       - name: Release Step
         run: |
-          echo "Creating final release!"
-          echo "Tag: ${{ needs.release-prep.outputs.tag_name }}"
-          echo "Release branch created: release/${{ needs.release-prep.outputs.tag_name }}"
+          echo "Running release step!"
 
   # This job runs post-release steps
   post-release:
@@ -101,4 +111,4 @@ jobs:
     steps:
       - name: Post Release Step
         run: |
-          echo "Running post-release deployment and notification steps!"
+          echo "Running post-release steps!"

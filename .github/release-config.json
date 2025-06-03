@@ -43,7 +43,6 @@
             "section": "🔧 其他變更"
         }
     ],
-    "group-pull-request-title-pattern": "chore: release ${version}",
     "include-v-in-tag": true,
     "packages": {
         ".": {
