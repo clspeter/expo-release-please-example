@@ -1,5 +1,23 @@
 # Changelog
 
+## [5.0.0-staging.1](https://github.com/clspeter/expo-release-please-example/compare/v5.0.0-staging...v5.0.0-staging.1) (2025-06-03)
+
+
+### ✨ 新功能
+
+* add feature ([be810b7](https://github.com/clspeter/expo-release-please-example/commit/be810b76ccb8dc00e1006c8593811434d7f39e56))
+
+
+### 🐛 Bug 修復
+
+* test fix ([a42f9c0](https://github.com/clspeter/expo-release-please-example/commit/a42f9c0ceee61111a0370d355084bace82e22df5))
+
+
+### 🔧 其他變更
+
+* **main:** release 5.0.0 ([17bdc20](https://github.com/clspeter/expo-release-please-example/commit/17bdc20e2e1f48351c44ad825ee1261af1740d74))
+* **main:** release 5.0.0 ([097ea07](https://github.com/clspeter/expo-release-please-example/commit/097ea07063a9a296efb6b02686ffac3ebf78a4e2))
+
 ## [5.0.0](https://github.com/clspeter/expo-release-please-example/compare/v4.0.11...v5.0.0) (2025-06-03)
 
 
