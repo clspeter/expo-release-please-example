@@ -1,5 +1,13 @@
 # Changelog
 
+## [5.0.0-staging.1](https://github.com/clspeter/expo-release-please-example/compare/v5.0.0-staging...v5.0.0-staging.1) (2025-06-03)
+
+
+### Miscellaneous Chores
+
+* **main:** release 5.0.0 ([1b6eead](https://github.com/clspeter/expo-release-please-example/commit/1b6eead5150a048cd4e86105e1090d2d17f46c84))
+* **main:** release 5.0.0 ([b8d250a](https://github.com/clspeter/expo-release-please-example/commit/b8d250a99e432795a771d30a716fc01b48608430))
+
 ## [5.0.0](https://github.com/clspeter/expo-release-please-example/compare/v4.0.13...v5.0.0) (2025-06-03)
 
 
