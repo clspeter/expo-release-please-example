@@ -45,12 +45,22 @@ jobs:
       releases_created: ${{ steps.release.outputs.releases_created }}
       tag_name: ${{ steps.release.outputs.tag_name }}
     steps:
+      - name: Check for Release-As in commit body
+        id: check_release_as
+        run: |
+          COMMIT_MESSAGE="${{ github.event.head_commit.message }}"
+          if echo "$COMMIT_MESSAGE" | grep -i "release-as:" > /dev/null; then
+            echo "has_release_as=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_release_as=false" >> $GITHUB_OUTPUT
+          fi
+
       - id: release
         name: Run prerelease release-please
         uses: googleapis/release-please-action@v4
         with:
-          config-file: ".github/staging-config.json"
-          manifest-file: ".github/staging-manifest.json"
+          config-file: ${{ steps.check_release_as.outputs.has_release_as == 'true' && '.github/release-config.json' || '.github/staging-config.json' }}
+          manifest-file: ${{ steps.check_release_as.outputs.has_release_as == 'true' && '.github/release-manifest.json' || '.github/staging-manifest.json' }}
           #token: ${{ secrets.MY_RELEASE_PLEASE_TOKEN }}
 
   # This job runs tests before the creation of the prerelease
