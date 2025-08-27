@@ -1,5 +1,13 @@
 # Changelog
 
+## [4.0.14-staging](https://github.com/clspeter/expo-release-please-example/compare/v4.0.13...v4.0.14-staging) (2025-08-27)
+
+
+### Miscellaneous Chores
+
+* **main:** update release configuration and version numbers ([dd3d54c](https://github.com/clspeter/expo-release-please-example/commit/dd3d54cca2e3165bfffa3f199377ce334770dbe3))
+* update config for Release--As: checker ([8d496dd](https://github.com/clspeter/expo-release-please-example/commit/8d496ddf497d29034c1d1acc730960deebbcba58))
+
 ## [4.0.13](https://github.com/clspeter/expo-release-please-example/compare/v4.0.13...v4.0.13) (2025-06-04)
 
 
