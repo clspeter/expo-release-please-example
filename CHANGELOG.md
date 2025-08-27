@@ -1,5 +1,23 @@
 # Changelog
 
+## [4.0.14-staging](https://github.com/clspeter/expo-release-please-example/compare/v4.0.13...v4.0.14-staging) (2025-08-27)
+
+
+### Bug Fixes
+
+* test ([76c7477](https://github.com/clspeter/expo-release-please-example/commit/76c747717bf0fa2116e75f81d685aee27b8bf9aa))
+
+
+### Miscellaneous Chores
+
+* add release branch handler ([8ea300d](https://github.com/clspeter/expo-release-please-example/commit/8ea300d1d051c1f4af748b336e438edda410ecf7))
+* **main:** release 4.0.13 ([2101170](https://github.com/clspeter/expo-release-please-example/commit/2101170995251129362cadbe6e221e4de6cc964f))
+* **main:** release 4.0.13 ([c6b508a](https://github.com/clspeter/expo-release-please-example/commit/c6b508a814cf9c2514cfd4f06642ce692247994c))
+* **main:** release 4.0.14-staging ([9509237](https://github.com/clspeter/expo-release-please-example/commit/9509237fec25302294ec5599f593338e970621a6))
+* **main:** release 4.0.14-staging ([935dd8b](https://github.com/clspeter/expo-release-please-example/commit/935dd8b5bc07f4c700da21bb73e8f9a01705b719))
+* **main:** update release configuration and version numbers ([dd3d54c](https://github.com/clspeter/expo-release-please-example/commit/dd3d54cca2e3165bfffa3f199377ce334770dbe3))
+* update config for Release--As: checker ([8d496dd](https://github.com/clspeter/expo-release-please-example/commit/8d496ddf497d29034c1d1acc730960deebbcba58))
+
 ## [4.0.13](https://github.com/clspeter/expo-release-please-example/compare/v4.0.14-staging...v4.0.13) (2025-08-27)
 
 
